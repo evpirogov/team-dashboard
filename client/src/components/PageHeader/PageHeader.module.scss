@@ -1,0 +1,76 @@
+@import '../../styles/variables';
+$nav-bar-elements-padding: 10px;
+$nav-bar-sm-elements-padding: 14px 10px;
+
+nav.pageHeader {
+  background-color: $background-main-blue;
+
+  .navWrapper {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    max-width: $default-container-width;
+    margin: auto;
+
+    .inlineElement {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .logo {
+      padding: $nav-bar-elements-padding;
+      padding-left: 0;
+      font-size: 22px;
+      line-height: 24px;
+      font-weight: 600;
+
+      a{
+        color: $color-main-font-light;
+      }
+    }
+
+    .links {
+
+      ul {
+        padding: 0;
+
+        li{
+          margin-left: 20px;
+
+          a{
+            display: block;
+            padding: $nav-bar-sm-elements-padding;
+
+            font-size: 16px;
+            line-height: 16px;
+            color: $color-main-font-light;
+          }
+        }
+
+        li.activePage {
+          background-color: $background-active-link;
+        }
+
+        .signOut {
+          color: red;
+          float: right;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//

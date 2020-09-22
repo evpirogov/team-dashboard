@@ -1,0 +1,29 @@
+
+//Colors
+$background-body: #F8F9FA;
+$color-main-font-dark: #444444;
+$color-main-font-light: #ffffff;
+$background-main-blue: #62B4FF;
+$background-active-link: #11223344;
+
+//spaces
+$default-container-width: 1200px;
+$content-row-margin: 20px 0 0 0;
+
+//rounds
+$block-inner-radius: 5px;
+$block-border-radius: 10px;
+
+//shadows
+$light-border-shadow: 0px 0px 0px 1px #ffffff;
+$dark-border-shadow: 0px 0px 0px 1px #4444;
+$block-shadow: 0 5px 15px rgba(31,45,61,.08);
+$block-shadow: 0 5px 15px rgba(31,45,61,.08);
+
+
+
+//mixins
+@mixin contentRow{
+  display: block;
+  margin: $content-row-margin;
+}

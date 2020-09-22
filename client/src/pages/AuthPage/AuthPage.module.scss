@@ -1,0 +1,60 @@
+@import '../../styles/variables';
+
+
+@mixin space {
+  display: block;
+  width: 100%;
+
+  //background-color: #eeeeee;
+}
+
+.authCard {
+  display: block;
+  margin: auto;
+  margin-top: 10vh;
+  box-sizing: border-box;
+
+  width: 380px;
+  padding: 30px;
+
+  background-color: #ffffff;
+  border-radius: 9px;
+  box-shadow: 0 0 0 1px #cccccc;
+
+
+  .authCardHeader {
+    h1{
+      color: $background-main-blue;
+    }
+  }
+
+  .authTip {
+    text-align: center;
+  }
+
+  .authButton {
+    display: inline-block;
+    background-color: $background-main-blue;
+    color: #ffffff;
+
+    padding: 6px 24px;
+    border-radius: 3px;
+    border: none;
+
+    font-size: 16px;
+
+    outline: none;
+    cursor: pointer;
+  }
+
+  .normalSpace {
+    @include space;
+    height: 60px;
+  }
+
+  .smallSpace {
+    @include space;
+    height: 30px;
+  }
+
+}

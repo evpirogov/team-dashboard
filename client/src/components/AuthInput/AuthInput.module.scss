@@ -1,0 +1,44 @@
+@import '../../styles/variables';
+
+.authInputGroup {
+  margin-bottom: 15px;
+
+  .headerRow {
+    display: block;
+    position: relative;
+    margin-bottom: 5px;
+
+
+    .inputHeader {
+      display: inline-block;
+      color: $background-main-blue;
+    }
+
+    .inputLabel {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      cursor: pointer;
+    }
+  }
+
+  .authInput {
+    display: block;
+    box-sizing: border-box;
+
+    width: 100%;
+    padding: 6px;
+
+    font-size: 16px;
+    border-radius: 3px;
+    border: none;
+
+    box-shadow: 0 0 0 1px #cccccc;
+
+    &:focus {
+      outline: none;
+
+      box-shadow: 0 0 0 2px #62b4ff;
+    }
+  }
+}
