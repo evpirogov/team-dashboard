@@ -2,8 +2,9 @@
 
 .container {
   box-sizing: border-box;
-  margin: auto;
-
   width: 100%;
   max-width: $default-container-width;
+
+  margin: auto;
+  padding-bottom: 50px;
 }
