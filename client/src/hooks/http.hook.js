@@ -37,6 +37,7 @@ export const useHttp = () => {
 
       throw e
     }
+    //eslint-disable-next-line
   },[])
 
   const clearError = useCallback(() => setError(null), [])
