@@ -1,10 +1,15 @@
-import React from "react";
+import React from "react"
 import $ from './Loader.module.scss'
 
 export const Loader = () => {
-  return(
+
+  return (
     <div className={$.loader}>
-      Loading...
+      <div className={$.box}/>
+      <div className={$.box}/>
+      <div className={$.box}/>
+      <div className={$.box}/>
+      <div className={$.box}/>
     </div>
   )
 }
