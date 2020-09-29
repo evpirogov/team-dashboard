@@ -27,7 +27,7 @@ router.get('/quarterStats', auth, async (req,res) => {
   const {username, password} = req.user
   const jira = new Jira('https://devjira.skyeng.ru', '/rest/api/2', username, password)
   try{
-    const issues = await jira.getIssuesFromJQL('project%20%3D%20"Kids%20Core"%20and%20status%20changed%20AFTER%20"2020%2F05%2F30"%20AND%20!(status%20%3D%20Closed%20and%20status%20changed%20BEFORE%20"2020%2F07%2F01")', ['worklog','changelog'])//['worklog','changelog']
+    const issues = await jira.getIssuesFromJQL('project%20%3D%20"Kids%20Core"%20and%20status%20changed%20AFTER%20"2020%2F05%2F30"%20AND%20!(status%20%3D%20Closed%20and%20status%20changed%20BEFORE%20"2020%2F07%2F01")%20and%20issuetype%20!%3D%20Epic%20', ['worklog','changelog'])//['worklog','changelog']
 
     issues.forEach(e => {
       e.timeline = jira.getIssueTimeline(e)
