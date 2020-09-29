@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react"
+import React, {useContext} from "react"
 import {useHistory} from "react-router-dom";
 import $ from './PageHeader.module.scss'
 import {AuthContext} from "../../context/AuthContext";
