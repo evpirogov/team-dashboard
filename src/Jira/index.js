@@ -43,23 +43,20 @@ class Jira {
   getIssuesFromJQL = async (jql, expand = []) => {
     try {
       const {data} = await axios.get(`${this.jiraApiUrl}/search/?jql=${jql}`, this.config)
-      const pages = Math.ceil(data.total / data.maxResults)
 
-      if (pages > 1) {
-        for (let i = 1; i < pages; i++) {
-          const startIndex = i * 50
+      const pages = Math.ceil(data.total / data.maxResults) - 1
 
-          const { data: chunk } = await axios.get(
-            `${this.jiraApiUrl}/search/?jql=${jql}&startAt=${startIndex}`,
-            this.config
-          )
-          data.issues = data.issues.concat(chunk.issues)
-        }
-      }
+      let pagesJQL = new Array(pages)
+        .fill('')
+        .map((e,i) => `${this.jiraApiUrl}/search/?jql=${jql}&startAt=${(i+1)*50}`)
 
-      if (expand.length === 0) return data.issues
+      const allIssues = (await Promise.all(pagesJQL.map(e => axios.get(e, this.config))))
+        .map(e => e.data.issues)
+        .reduce((a,e) => a.concat(e), data.issues)
 
-      return await Promise.all(data.issues.map( e => this.expandIssue(e.key, expand)))
+      if (expand.length === 0) return allIssues
+
+      return await Promise.all(allIssues.map( e => this.expandIssue(e.key, expand)))
     } catch (e) {
       console.log(e)
     }
