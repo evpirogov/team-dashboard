@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken')
 const config = require('config')
 
+
 module.exports = (req, res, next) => {
+
   if (req.method === 'OPTIONS') return next()
 
   try {
@@ -13,7 +15,6 @@ module.exports = (req, res, next) => {
 
     next()
   } catch (e) {
-    if (e.name === 'TokenExpiredError') auth.logout()
-    res.status(401).json({message: 'Нет авторизации', reason: e.name})
+    if (e.name === 'TokenExpiredError') res.status(401).json({message: 'Нет авторизации', reason: e.name})
   }
 }
