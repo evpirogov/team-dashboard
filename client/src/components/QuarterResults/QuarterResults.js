@@ -3,7 +3,7 @@ import {useState} from "react"
 import {useHttp} from "../../hooks/http.hook";
 import {AuthContext} from "../../context/AuthContext";
 
-import $ from './QuaterResults.module.scss'
+import $ from './QuarterResults.module.scss'
 import {StackedLineChart} from "../Charts/StackedLineChart";
 import {ProgressBar} from "./ProgressBar/ProgressBar";
 import {Loader} from "../Loader/Loader";
@@ -87,12 +87,13 @@ export const QuarterResult = () => {
 
     const time_b = new Date(Date.now())
     console.log(`${(time_b - time_a)/1000} seconds`)
-  }, [request])
+  }, [request, token])
 
 
   useEffect(() => {
     console.log({loading}, 'useEffect: getDat')
     if (!loading) getDataFlow()
+    //eslint-disable-next-line
   }, [getDataFlow])
 
   useEffect(() => {
