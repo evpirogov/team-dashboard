@@ -83,6 +83,7 @@ export const QuarterResult = () => {
         Authorization: `Bearer ${token}`
       })
       setData(fetchedData)
+      console.log(fetchedData)
     } catch (e) {}
 
     const time_b = new Date(Date.now())
@@ -106,17 +107,36 @@ export const QuarterResult = () => {
     <div className={$.section}>
       <div className={$.block}>
         <h1 className={$.header}>{`Quarter statistics: ${quarter.title}`}</h1>
+
         <ProgressBar content={quarterAccomplishmentProgress}/>
         <ProgressBar content={quarterTimelineProgress}/>
-        {loading && <Loader/>}
-        <div className={$.contentRow}>
-          {!loading && <StackedLineChart chartName={'Cumulative diagram'} datasets={dataFlow.datasets} labels={dataFlow.labels} stacked={true}/>}
+      </div>
+      {loading && <div className={$.block}><Loader/></div>}
+      {!loading && <>
+        <div className={$.block}>
+          <div className={$.contentRow}>
+            {!loading && <StackedLineChart chartName={'Cumulative diagram (issues)'} datasets={dataFlow.flowDatasets} labels={dataFlow.labels} stacked={true}/>}
+          </div>
         </div>
 
-        <div className={$.contentRow}>
-          {!loading && <StackedLineChart chartName={'Team metrics'} datasets={dataFlow.teamMetrics} labels={dataFlow.labels} stacked={false}/>}
+        <div className={$.block}>
+          <div className={$.contentRow}>
+            {!loading && <StackedLineChart chartName={'Team metrics (issues)'} datasets={dataFlow.teamMetrics} labels={dataFlow.labels} stacked={false}/>}
+          </div>
         </div>
-      </div>
+
+        <div className={$.block}>
+          <div className={$.contentRow}>
+            {!loading && <StackedLineChart chartName={'Logged time (hours)'} datasets={dataFlow.devMetrics} labels={dataFlow.labels} stacked={false}/>}
+          </div>
+        </div>
+
+        <div className={$.block}>
+          <div className={$.contentRow}>
+            {!loading && <StackedLineChart chartName={'Personal worklog (hours)'} datasets={dataFlow.personalWorklog} labels={dataFlow.labels} stacked={false}/>}
+          </div>
+        </div>
+      </>}
     </div>
   )
 }
