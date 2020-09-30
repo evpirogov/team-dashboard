@@ -33,15 +33,13 @@ router.get('/quarterStats', auth, async (req,res) => {
       e.timeline = jira.getIssueTimeline(e)
     })
 
-    const {labels, datasets, metrics, teamMetrics} = getChartData(issues)
+    const {labels, flowDatasets, metrics, teamMetrics, devMetrics, personalWorklog} = getChartData(issues)
 
-    res.json({labels, datasets, metrics, teamMetrics})
+    res.json({labels, flowDatasets, metrics, teamMetrics, devMetrics, personalWorklog})
   }catch (e) {
     console.log(e)
     res.status(500).json({message:'Что-то пошло не так попробуйте снова'})
   }
 })
-
-
 
 module.exports = router
