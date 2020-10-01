@@ -56,6 +56,7 @@ export const QuarterResult = () => {
 
   const quaterAccompleeshed = `${Math.trunc(((quarter.todayDate - quarter.startDate) / (quarter.endDate - quarter.startDate) * 100))}%`
 
+
   const quarterTimelineProgress = {
     title: 'Quarter timeline',
     style: {
@@ -67,6 +68,24 @@ export const QuarterResult = () => {
         width: quaterAccompleeshed,
         style: {
           width: quaterAccompleeshed,
+          color: '#fff',
+          backgroundColor: '#4a6785'
+        },
+      }
+    ]
+  }
+
+  const quarterNotPlannedSpentTime = {
+    title: 'Not planned',
+    style: {
+      backgroundColor: '#EEEEEE'
+    },
+    chunks: [
+      {
+        chunkTitle: 'percent',
+        width: `${dataFlow.notPlannedSpentTime}%`,
+        style: {
+          width: `${dataFlow.notPlannedSpentTime}%`,
           color: '#fff',
           backgroundColor: '#4a6785'
         },
@@ -108,10 +127,14 @@ export const QuarterResult = () => {
       <div className={$.block}>
         <h1 className={$.header}>{`Quarter statistics: ${quarter.title}`}</h1>
 
-        <ProgressBar content={quarterAccomplishmentProgress}/>
-        <ProgressBar content={quarterTimelineProgress}/>
+        {loading && <Loader/>}
+
+        {!loading && <>
+          <ProgressBar content={quarterTimelineProgress}/>
+          <ProgressBar content={quarterAccomplishmentProgress}/>
+          <ProgressBar content={quarterNotPlannedSpentTime}/>
+        </>}
       </div>
-      {loading && <div className={$.block}><Loader/></div>}
       {!loading && <>
         <div className={$.block}>
           <div className={$.contentRow}>

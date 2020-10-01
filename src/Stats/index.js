@@ -1,5 +1,5 @@
 
-const getChartData = (issues, flowDatasets = [], timemarkers = [], teamMetrics= [], devMetrics = [], personalWorklog = []) => {
+const getChartData = (issues, quarterIssues, flowDatasets = [], timemarkers = [], teamMetrics= [], devMetrics = [], personalWorklog = []) => {
   const activeStatuses = [
     "In Prod Testing",
     "Need Prod Testing",
@@ -431,9 +431,11 @@ const getChartData = (issues, flowDatasets = [], timemarkers = [], teamMetrics= 
       data: new Array(timemarkers.length).fill(0),
     },
   ]
-
+  let totalSpendTime = 0
+  let plannedSpendTime = 0
+  let notPlannedSpentTime
+  let metrics = []
   const timePeriod = new Date(timemarkers[1]) - new Date(timemarkers[0])
-
   const labels = timemarkers.map(e => e.slice(0,-5))
 
   for (let t = 0; t < timemarkers.length; t++) {
@@ -451,6 +453,7 @@ const getChartData = (issues, flowDatasets = [], timemarkers = [], teamMetrics= 
           && worklogData < worklogEndDate
           && worklog.author.name !== 'a.novichkova'
         ) {
+          totalSpendTime += worklog.timeSpentSeconds / 3600
           devMetrics[0].data[t] += worklog.timeSpentSeconds / 3600
           const redev = issue.timeline.filter(t => t.status.indexOf("Need redev") !== -1).shift()
           if (redev && worklogData >= redev.startDate) devMetrics[3].data[t] += worklog.timeSpentSeconds / 3600
@@ -511,7 +514,6 @@ const getChartData = (issues, flowDatasets = [], timemarkers = [], teamMetrics= 
     // console.log(activeFocuses)
   }
 
-  let metrics = []
   timemarkers.forEach((t,w) => {
     const weekStats = {
       active: 0,
@@ -552,7 +554,17 @@ const getChartData = (issues, flowDatasets = [], timemarkers = [], teamMetrics= 
 
   })
 
-  return {labels, flowDatasets, metrics, teamMetrics, devMetrics, personalWorklog}
+  quarterIssues.forEach(issue => {
+    issue.fields.worklog.worklogs.forEach(worklog => {
+      if (worklog.author.name !== 'a.novichkova') {
+        plannedSpendTime += worklog.timeSpentSeconds / 3600
+      }
+    })
+  })
+
+  notPlannedSpentTime = Math.trunc((totalSpendTime - plannedSpendTime)*100/totalSpendTime)
+
+  return {labels, flowDatasets, metrics, teamMetrics, devMetrics, personalWorklog, notPlannedSpentTime}
 }
 module.exports = {
   getChartData
