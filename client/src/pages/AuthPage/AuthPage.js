@@ -58,12 +58,11 @@ export const AuthPage = () => {
           <h1>Welcome</h1>
           <p>Sign in</p>
         </div>
-        <div className={$.smallSpace}/>
+        <div className={$.normalSpace}/>
         <div className={$.authTip}>
-          <p>Use your Jira credentials.</p>
-          <p>It is safe. Trust me.</p>
+          {/*<p>Use your Jira credentials.</p>*/}
+          {/*<p>It is safe. Trust me.</p>*/}
         </div>
-        <div className={$.smallSpace}/>
         <AuthInput params={usernameInputParams}/>
         <AuthInput params={passwordInputParams}/>
         <div className={$.normalSpace} style={{color:'#b00000'}}>{error}</div>
