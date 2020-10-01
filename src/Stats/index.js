@@ -431,6 +431,12 @@ const getChartData = (issues, quarterIssues, flowDatasets = [], timemarkers = []
       data: new Array(timemarkers.length).fill(0),
     },
   ]
+  let quarterProgress = {
+    done: 0,
+    progress: 0,
+    todo: 0,
+    total: 0
+  }
   let totalSpendTime = 0
   let plannedSpendTime = 0
   let notPlannedSpentTime
@@ -555,6 +561,20 @@ const getChartData = (issues, quarterIssues, flowDatasets = [], timemarkers = []
   })
 
   quarterIssues.forEach(issue => {
+    const status = issue.fields.status.name
+    if (issue.fields.issuetype.name === 'Story') {
+      if (activeStatuses.includes(status)) {
+        quarterProgress.total++
+        quarterProgress.progress++
+      } else if (['Closed', 'Done'].includes(status)) {
+        quarterProgress.total++
+        quarterProgress.done++
+      } else {
+        quarterProgress.total++
+        quarterProgress.todo++
+      }
+    }
+
     issue.fields.worklog.worklogs.forEach(worklog => {
       if (worklog.author.name !== 'a.novichkova') {
         plannedSpendTime += worklog.timeSpentSeconds / 3600
@@ -562,9 +582,14 @@ const getChartData = (issues, quarterIssues, flowDatasets = [], timemarkers = []
     })
   })
 
-  notPlannedSpentTime = Math.trunc((totalSpendTime - plannedSpendTime)*100/totalSpendTime)
+  console.log(quarterProgress)
+  quarterProgress.progress = Math.trunc(quarterProgress.progress * 100/quarterProgress.total)
+  quarterProgress.done = Math.trunc(quarterProgress.done * 100/quarterProgress.total)
+  quarterProgress.todo = 100 - quarterProgress.progress - quarterProgress.done
 
-  return {labels, flowDatasets, metrics, teamMetrics, devMetrics, personalWorklog, notPlannedSpentTime}
+  notPlannedSpentTime = Math.trunc((totalSpendTime - plannedSpendTime) * 100/totalSpendTime)
+
+  return {labels, flowDatasets, metrics, teamMetrics, devMetrics, personalWorklog, notPlannedSpentTime, quarterProgress}
 }
 module.exports = {
   getChartData

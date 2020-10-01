@@ -9,7 +9,7 @@ export const ProgressBar = ({content}) => {
       <div className={$.progressBar} style={content.style}>
         {content.chunks.map( (e,i) => (
           <div key={i} className={$.status} style={e.style}>
-            {`${e.chunkTitle}: ${e.width}`}
+            {e.chunkTitle ? `${e.chunkTitle}: ${e.width}` : e.width}
           </div>)
         )}
       </div>

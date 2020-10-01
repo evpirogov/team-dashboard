@@ -36,9 +36,9 @@ router.get('/quarterStats', auth, async (req,res) => {
       e.timeline = jira.getIssueTimeline(e)
     })
 
-    const {labels, flowDatasets, metrics, teamMetrics, devMetrics, personalWorklog, notPlannedSpentTime} = getChartData(issues, quarterIssues)
+    const {labels, flowDatasets, metrics, teamMetrics, devMetrics, personalWorklog, notPlannedSpentTime, quarterProgress} = getChartData(issues, quarterIssues)
 
-    res.json({labels, flowDatasets, metrics, teamMetrics, devMetrics, personalWorklog, notPlannedSpentTime, quarterIssues})
+    res.json({labels, flowDatasets, metrics, teamMetrics, devMetrics, personalWorklog, notPlannedSpentTime, quarterProgress})
   }catch (e) {
     console.log(e)
     res.status(500).json({message:'Что-то пошло не так попробуйте снова'})

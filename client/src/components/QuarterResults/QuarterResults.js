@@ -15,31 +15,31 @@ export const QuarterResult = () => {
 
 
   const quarterAccomplishmentProgress = {
-    title: 'Percentage of accomplishment',
+    title: `Percentage of accomplishment (${dataFlow.quarterProgress?.total} issues)`,
     chunks: [
       {
         chunkTitle: 'done',
-        width: '67%',
+        width: `${dataFlow.quarterProgress?.done}%`,
         style: {
-          width: '67%',
+          width: `${dataFlow.quarterProgress?.done}%`,
           color: '#fff',
           backgroundColor: '#13892c'
         },
       },
       {
         chunkTitle: 'progress',
-        width: '13%',
+        width: `${dataFlow.quarterProgress?.progress}%`,
         style: {
-          width: '13%',
+          width: `${dataFlow.quarterProgress?.progress}%`,
           color: '#fff',
           backgroundColor: '#ffc61d'
         },
       },
       {
         chunkTitle: 'todo',
-        width: '20%',
+        width: `${dataFlow.quarterProgress?.todo}%`,
         style: {
-          width: '20%',
+          width: `${dataFlow.quarterProgress?.todo}%`,
           color: '#fff',
           backgroundColor: '#4a6785'
         },
@@ -82,7 +82,7 @@ export const QuarterResult = () => {
     },
     chunks: [
       {
-        chunkTitle: 'percent',
+        chunkTitle: '',
         width: `${dataFlow.notPlannedSpentTime}%`,
         style: {
           width: `${dataFlow.notPlannedSpentTime}%`,
