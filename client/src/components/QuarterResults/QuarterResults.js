@@ -54,7 +54,8 @@ export const QuarterResult = () => {
     todayDate: new Date(Date.now())
   }
 
-  const quaterAccompleeshed = `${Math.trunc(((quarter.todayDate - quarter.startDate) / (quarter.endDate - quarter.startDate) * 100))}%`
+  let quaterAccompleeshed = Math.trunc(((quarter.todayDate - quarter.startDate) / (quarter.endDate - quarter.startDate) * 100))
+      quaterAccompleeshed = quaterAccompleeshed < 100 ? `${quaterAccompleeshed}%` : '100%'
 
 
   const quarterTimelineProgress = {
