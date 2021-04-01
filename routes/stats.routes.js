@@ -28,8 +28,9 @@ router.get('/quarterStats', auth, async (req,res) => {
   const jira = new Jira('https://devjira.skyeng.ru', '/rest/api/2', username, password)
   try{
     const [issues, quarterIssues] = await Promise.all([
-      jira.getIssuesFromJQL('project%20%3D%20"Kids%20Core"%20and%20status%20changed%20AFTER%20"2020%2F05%2F30"%20AND%20!(status%20%3D%20Closed%20and%20status%20changed%20BEFORE%20"2020%2F07%2F01")%20and%20issuetype%20!%3D%20Epic%20', ['worklog','changelog']),
-      jira.getIssuesFromJQL('project%20%3D%20"Kids%20Core"%20AND%20labels%20%3D%20Q3_2020%20OR%20parent%20in%20havingSubtaskIssuesFromQuery("project%20%3D%20%5C"Kids%20Core%5C"%20and%20labels%20%3D%20Q3_2020")',['worklog','changelog'])
+      jira.getIssuesFromJQL('project%20%3D%20"KIDS"%20and%20status%20changed%20AFTER%20"2020%2F05%2F30"%20AND%20!(status%20%3D%20Closed%20and%20status%20changed%20BEFORE%20"2020%2F07%2F01")%20and%20issuetype%20!%3D%20Epic%20', ['worklog','changelog']),
+      // jira.getIssuesFromJQL('project%20%3D%20"KIDS"%20AND%20labels%20%3D%20Q3_2020%20OR%20parent%20in%20havingSubtaskIssuesFromQuery("project%20%3D%20%5C"Kids%20Core%5C"%20and%20labels%20%3D%20Q3_2020")',['worklog','changelog']) //
+      jira.getIssuesFromJQL('project%20%3D%20"KIDS"%20AND%20labels%20%3D%20Q3_2020%20',['worklog','changelog']) //OR%20parent%20in%20havingSubtaskIssuesFromQuery("project%20%3D%20%5C"Kids%20Core%5C"%20and%20labels%20%3D%20Q3_2020")
     ])
 
     issues.forEach(e => {
