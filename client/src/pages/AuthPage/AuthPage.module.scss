@@ -9,9 +9,9 @@
 }
 
 .authCard {
+
   display: block;
-  margin: auto;
-  margin-top: 10vh;
+  position: absolute;
   box-sizing: border-box;
 
   width: 380px;
@@ -20,6 +20,11 @@
   background-color: #ffffff;
   border-radius: 9px;
   //box-shadow: 0 0 0 1px #cccccc;
+
+
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 
 
   .authCardHeader {

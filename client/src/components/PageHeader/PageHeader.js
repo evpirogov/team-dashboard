@@ -17,7 +17,7 @@ export const PageHeader = () => {
     <nav className={$.pageHeader}>
       <div className={$.navWrapper}>
         <div className={`${$.logo} ${$.inlineElement}`}>
-          <a href="/">KidsCore</a>
+          <a href="/">CS Product</a>
         </div>
         <div className={`${$.links} ${$.inlineElement}`}>
           <ul>
